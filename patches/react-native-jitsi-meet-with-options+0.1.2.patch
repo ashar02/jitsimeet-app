@@ -1,0 +1,65 @@
+diff --git a/node_modules/react-native-jitsi-meet-with-options/.DS_Store b/node_modules/react-native-jitsi-meet-with-options/.DS_Store
+new file mode 100644
+index 0000000..ca21cd4
+Binary files /dev/null and b/node_modules/react-native-jitsi-meet-with-options/.DS_Store differ
+diff --git a/node_modules/react-native-jitsi-meet-with-options/android/build.gradle b/node_modules/react-native-jitsi-meet-with-options/android/build.gradle
+index 27d041a..e7b5ead 100644
+--- a/node_modules/react-native-jitsi-meet-with-options/android/build.gradle
++++ b/node_modules/react-native-jitsi-meet-with-options/android/build.gradle
+@@ -45,7 +45,7 @@ repositories {
+ }
+ 
+ dependencies {
+-    implementation ('org.jitsi.react:jitsi-meet-sdk:2.4.0') {
++    implementation ('org.jitsi.react:jitsi-meet-sdk:3.3.0') {
+       transitive = true
+     }
+ }
+diff --git a/node_modules/react-native-jitsi-meet-with-options/ios/.DS_Store b/node_modules/react-native-jitsi-meet-with-options/ios/.DS_Store
+new file mode 100644
+index 0000000..3aa00dc
+Binary files /dev/null and b/node_modules/react-native-jitsi-meet-with-options/ios/.DS_Store differ
+diff --git a/node_modules/react-native-jitsi-meet-with-options/ios/RNJitsiMeetView.h b/node_modules/react-native-jitsi-meet-with-options/ios/RNJitsiMeetView.h
+index c6022e9..7268e19 100644
+--- a/node_modules/react-native-jitsi-meet-with-options/ios/RNJitsiMeetView.h
++++ b/node_modules/react-native-jitsi-meet-with-options/ios/RNJitsiMeetView.h
+@@ -1,4 +1,4 @@
+-#import <JitsiMeet/JitsiMeet.h>
++#import <JitsiMeetSDK/JitsiMeetSDK.h>
+ 
+ #import <React/RCTComponent.h>
+ 
+diff --git a/node_modules/react-native-jitsi-meet-with-options/ios/RNJitsiMeetViewManager.h b/node_modules/react-native-jitsi-meet-with-options/ios/RNJitsiMeetViewManager.h
+index 06906ee..a898456 100644
+--- a/node_modules/react-native-jitsi-meet-with-options/ios/RNJitsiMeetViewManager.h
++++ b/node_modules/react-native-jitsi-meet-with-options/ios/RNJitsiMeetViewManager.h
+@@ -1,5 +1,5 @@
+ #import <React/RCTViewManager.h>
+-#import <JitsiMeet/JitsiMeetViewDelegate.h>
++#import <JitsiMeetSDK/JitsiMeetViewDelegate.h>
+ 
+ @interface RNJitsiMeetViewManager : RCTViewManager <JitsiMeetViewDelegate>
+ @end
+diff --git a/node_modules/react-native-jitsi-meet-with-options/ios/RNJitsiMeetViewManager.m b/node_modules/react-native-jitsi-meet-with-options/ios/RNJitsiMeetViewManager.m
+index 9f91f0d..09f4f27 100644
+--- a/node_modules/react-native-jitsi-meet-with-options/ios/RNJitsiMeetViewManager.m
++++ b/node_modules/react-native-jitsi-meet-with-options/ios/RNJitsiMeetViewManager.m
+@@ -1,6 +1,6 @@
+ #import "RNJitsiMeetViewManager.h"
+ #import "RNJitsiMeetView.h"
+-#import <JitsiMeet/JitsiMeetUserInfo.h>
++#import <JitsiMeetSDK/JitsiMeetUserInfo.h>
+ 
+ @implementation RNJitsiMeetViewManager{
+     RNJitsiMeetView *jitsiMeetView;
+diff --git a/node_modules/react-native-jitsi-meet-with-options/react-native-jitsi-meet-with-options.podspec b/node_modules/react-native-jitsi-meet-with-options/react-native-jitsi-meet-with-options.podspec
+index 096c675..7683d0e 100644
+--- a/node_modules/react-native-jitsi-meet-with-options/react-native-jitsi-meet-with-options.podspec
++++ b/node_modules/react-native-jitsi-meet-with-options/react-native-jitsi-meet-with-options.podspec
+@@ -16,5 +16,5 @@ Pod::Spec.new do |s|
+   s.source_files  = "ios/**/*.{h,m}"
+ 
+   s.dependency 'React'
+-  s.dependency 'JitsiMeetSDK', '2.4.0'
++  s.dependency 'JitsiMeetSDK', '3.3.0'
+ end
