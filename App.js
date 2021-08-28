@@ -11,7 +11,7 @@ import {
   Switch,
 } from 'react-native';
 
-import JitsiMeet, {JitsiMeetView} from 'react-native-jitsi-meet';
+import JitsiMeet, {JitsiMeetView} from 'react-native-jitsi-meet-with-options';
 
 function App() {
   const [userName, setUserName] = useState('');
@@ -57,12 +57,33 @@ function App() {
           email: 'user@example.com',
           avatar: 'https:/gravatar.com/avatar/abc123',
         };
-        if (isVideoEnabled) {
-          JitsiMeet.call(url, userInfo);
-        } else {
-          JitsiMeet.audioCall(url);
-        }
-      }, 1000);
+        const options = {
+          room: '',
+          token: '',
+          audioMuted: false,
+          videoMuted: isVideoEnabled,
+          subject: '',
+        };
+        const meetFeatureFlags = {
+          'add-people.enabled': false,
+          'calendar.enabled': false,
+          'call-integration.enabled': true,
+          'chat.enabled': false,
+          'close-captions.enabled': false,
+          'invite.enabled': false,
+          'ios.recording.enabled': false,
+          'live-streaming.enabled': false,
+          'meeting-name.enabled': true,
+          'meeting-password.enabled': false,
+          'pip.enabled': true,
+          'raise-hand.enabled': false,
+          'recording.enabled': false,
+          'toolbox.alwaysVisible': false,
+          'welcomepage.enabled': false,
+        };
+        options.audioOnly = !isVideoEnabled;
+        JitsiMeet.call(url, userInfo, options, meetFeatureFlags);
+      }, 100);
     } else {
       Alert.alert('Make sure to enter your name and call-link!');
     }
