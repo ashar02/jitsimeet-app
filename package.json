@@ -13,6 +13,7 @@
     "release-build": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/app.bundle --assets-dest android/app/src/main/res/ && rm -rf android/app/src/main/res/drawable-* && rm -rf android/app/src/main/res/raw/* && rm -f android/app/src/main/assets/app.bundle && cd android && ./gradlew clean && ./gradlew assembleRelease && cd .."
   },
   "dependencies": {
+    "instabug-reactnative": "^10.8.1",
     "patch-package": "^6.4.7",
     "react": "16.13.1",
     "react-native": "0.63.4",
