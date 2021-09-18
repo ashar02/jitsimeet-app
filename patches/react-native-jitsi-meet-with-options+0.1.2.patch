@@ -1,7 +1,3 @@
-diff --git a/node_modules/react-native-jitsi-meet-with-options/.DS_Store b/node_modules/react-native-jitsi-meet-with-options/.DS_Store
-new file mode 100644
-index 0000000..ca21cd4
-Binary files /dev/null and b/node_modules/react-native-jitsi-meet-with-options/.DS_Store differ
 diff --git a/node_modules/react-native-jitsi-meet-with-options/android/build.gradle b/node_modules/react-native-jitsi-meet-with-options/android/build.gradle
 index 27d041a..e7b5ead 100644
 --- a/node_modules/react-native-jitsi-meet-with-options/android/build.gradle
@@ -15,12 +11,39 @@ index 27d041a..e7b5ead 100644
        transitive = true
      }
  }
-diff --git a/node_modules/react-native-jitsi-meet-with-options/ios/.DS_Store b/node_modules/react-native-jitsi-meet-with-options/ios/.DS_Store
-new file mode 100644
-index 0000000..3aa00dc
-Binary files /dev/null and b/node_modules/react-native-jitsi-meet-with-options/ios/.DS_Store differ
+diff --git a/node_modules/react-native-jitsi-meet-with-options/android/src/main/java/com/reactnativejitsimeet/RNJitsiMeetModule.java b/node_modules/react-native-jitsi-meet-with-options/android/src/main/java/com/reactnativejitsimeet/RNJitsiMeetModule.java
+index eb38247..aeb1a61 100644
+--- a/node_modules/react-native-jitsi-meet-with-options/android/src/main/java/com/reactnativejitsimeet/RNJitsiMeetModule.java
++++ b/node_modules/react-native-jitsi-meet-with-options/android/src/main/java/com/reactnativejitsimeet/RNJitsiMeetModule.java
+@@ -78,6 +78,26 @@ public class RNJitsiMeetModule extends ReactContextBaseJavaModule {
+                         // .setFeatureFlag("tile-view.enabled", meetFeatureFlags.getBoolean("tile-view.enabled"))
+                         .setFeatureFlag("toolbox.alwaysVisible", meetFeatureFlags.getBoolean("toolbox.alwaysVisible"))
+                         .setFeatureFlag("welcomepage.enabled", meetFeatureFlags.getBoolean("welcomepage.enabled"))
++                        .setFeatureFlag("filmstrip.enabled", meetFeatureFlags.getBoolean("filmstrip.enabled"))
++                        .setFeatureFlag("audio-focus.disabled", meetFeatureFlags.getBoolean("audio-focus.disabled"))
++                        .setFeatureFlag("audio-mute.enabled", meetFeatureFlags.getBoolean("audio-mute.enabled"))
++                        .setFeatureFlag("audio-only.enabled", meetFeatureFlags.getBoolean("audio-only.enabled"))
++                        .setFeatureFlag("conference-timer.enabled", meetFeatureFlags.getBoolean("conference-timer.enabled"))
++                        .setFeatureFlag("fullscreen.enabled", meetFeatureFlags.getBoolean("fullscreen.enabled"))
++                        .setFeatureFlag("help.enabled", meetFeatureFlags.getBoolean("help.enabled"))
++                        .setFeatureFlag("ios.screensharing.enabled", meetFeatureFlags.getBoolean("ios.screensharing.enabled"))
++                        .setFeatureFlag("android.screensharing.enabled", meetFeatureFlags.getBoolean("android.screensharing.enabled"))
++                        .setFeatureFlag("kick-out.enabled", meetFeatureFlags.getBoolean("kick-out.enabled"))
++                        .setFeatureFlag("lobby-mode.enabled", meetFeatureFlags.getBoolean("lobby-mode.enabled"))
++                        .setFeatureFlag("notifications.enabled", meetFeatureFlags.getBoolean("notifications.enabled"))
++                        .setFeatureFlag("overflow-menu.enabled", meetFeatureFlags.getBoolean("overflow-menu.enabled"))
++                        .setFeatureFlag("reactions.enabled", meetFeatureFlags.getBoolean("reactions.enabled"))
++                        .setFeatureFlag("security-options.enabled", meetFeatureFlags.getBoolean("security-options.enabled"))
++                        .setFeatureFlag("server-url-change.enabled", meetFeatureFlags.getBoolean("server-url-change.enabled"))
++                        .setFeatureFlag("tile-view.enabled", meetFeatureFlags.getBoolean("tile-view.enabled"))
++                        .setFeatureFlag("toolbox.enabled", meetFeatureFlags.getBoolean("toolbox.enabled"))
++                        .setFeatureFlag("video-mute.enabled", meetFeatureFlags.getBoolean("video-mute.enabled"))
++                        .setFeatureFlag("video-share.enabled", meetFeatureFlags.getBoolean("video-share.enabled"))
+                         .build();
+                     mJitsiMeetViewReference.getJitsiMeetView().join(options);
+                 }
 diff --git a/node_modules/react-native-jitsi-meet-with-options/ios/RNJitsiMeetView.h b/node_modules/react-native-jitsi-meet-with-options/ios/RNJitsiMeetView.h
-index c6022e9..7268e19 100644
+index c6022e9..7059dc9 100644
 --- a/node_modules/react-native-jitsi-meet-with-options/ios/RNJitsiMeetView.h
 +++ b/node_modules/react-native-jitsi-meet-with-options/ios/RNJitsiMeetView.h
 @@ -1,4 +1,4 @@
@@ -30,7 +53,7 @@ index c6022e9..7268e19 100644
  #import <React/RCTComponent.h>
  
 diff --git a/node_modules/react-native-jitsi-meet-with-options/ios/RNJitsiMeetViewManager.h b/node_modules/react-native-jitsi-meet-with-options/ios/RNJitsiMeetViewManager.h
-index 06906ee..a898456 100644
+index 06906ee..682e9ec 100644
 --- a/node_modules/react-native-jitsi-meet-with-options/ios/RNJitsiMeetViewManager.h
 +++ b/node_modules/react-native-jitsi-meet-with-options/ios/RNJitsiMeetViewManager.h
 @@ -1,5 +1,5 @@
@@ -40,8 +63,9 @@ index 06906ee..a898456 100644
  
  @interface RNJitsiMeetViewManager : RCTViewManager <JitsiMeetViewDelegate>
  @end
+\ No newline at end of file
 diff --git a/node_modules/react-native-jitsi-meet-with-options/ios/RNJitsiMeetViewManager.m b/node_modules/react-native-jitsi-meet-with-options/ios/RNJitsiMeetViewManager.m
-index 9f91f0d..09f4f27 100644
+index 9f91f0d..641fbbc 100644
 --- a/node_modules/react-native-jitsi-meet-with-options/ios/RNJitsiMeetViewManager.m
 +++ b/node_modules/react-native-jitsi-meet-with-options/ios/RNJitsiMeetViewManager.m
 @@ -1,6 +1,6 @@
@@ -52,6 +76,33 @@ index 9f91f0d..09f4f27 100644
  
  @implementation RNJitsiMeetViewManager{
      RNJitsiMeetView *jitsiMeetView;
+@@ -73,6 +73,26 @@ RCT_EXPORT_METHOD(
+             [builder setFeatureFlag:@"tile-view.enabled" withBoolean:[[meetFeatureFlags objectForKey:@"tile-view.enabled"] boolValue]];
+             [builder setFeatureFlag:@"tile-view.enabled" withBoolean:[[meetFeatureFlags objectForKey:@"tile-view.enabled"] boolValue]];
+             [builder setFeatureFlag:@"welcomepage.enabled" withBoolean:[[meetFeatureFlags objectForKey:@"welcomepage.enabled"] boolValue]];
++            [builder setFeatureFlag:@"filmstrip.enabled" withBoolean:[[meetFeatureFlags objectForKey:@"filmstrip.enabled"] boolValue]];
++            [builder setFeatureFlag:@"audio-focus.disabled" withBoolean:[[meetFeatureFlags objectForKey:@"audio-focus.disabled"] boolValue]];
++            [builder setFeatureFlag:@"audio-mute.enabled" withBoolean:[[meetFeatureFlags objectForKey:@"audio-mute.enabled"] boolValue]];
++            [builder setFeatureFlag:@"audio-only.enabled" withBoolean:[[meetFeatureFlags objectForKey:@"audio-only.enabled"] boolValue]];
++            [builder setFeatureFlag:@"conference-timer.enabled" withBoolean:[[meetFeatureFlags objectForKey:@"conference-timer.enabled"] boolValue]];
++            [builder setFeatureFlag:@"fullscreen.enabled" withBoolean:[[meetFeatureFlags objectForKey:@"fullscreen.enabled"] boolValue]];
++            [builder setFeatureFlag:@"help.enabled" withBoolean:[[meetFeatureFlags objectForKey:@"help.enabled"] boolValue]];
++            [builder setFeatureFlag:@"ios.screensharing.enabled" withBoolean:[[meetFeatureFlags objectForKey:@"ios.screensharing.enabled"] boolValue]];
++            [builder setFeatureFlag:@"android.screensharing.enabled" withBoolean:[[meetFeatureFlags objectForKey:@"android.screensharing.enabled"] boolValue]];
++            [builder setFeatureFlag:@"kick-out.enabled" withBoolean:[[meetFeatureFlags objectForKey:@"kick-out.enabled"] boolValue]];
++            [builder setFeatureFlag:@"lobby-mode.enabled" withBoolean:[[meetFeatureFlags objectForKey:@"lobby-mode.enabled"] boolValue]];
++            [builder setFeatureFlag:@"notifications.enabled" withBoolean:[[meetFeatureFlags objectForKey:@"notifications.enabled"] boolValue]];
++            [builder setFeatureFlag:@"overflow-menu.enabled" withBoolean:[[meetFeatureFlags objectForKey:@"overflow-menu.enabled"] boolValue]];
++            [builder setFeatureFlag:@"reactions.enabled" withBoolean:[[meetFeatureFlags objectForKey:@"reactions.enabled"] boolValue]];
++            [builder setFeatureFlag:@"security-options.enabled" withBoolean:[[meetFeatureFlags objectForKey:@"security-options.enabled"] boolValue]];
++            [builder setFeatureFlag:@"server-url-change.enabled" withBoolean:[[meetFeatureFlags objectForKey:@"server-url-change.enabled"] boolValue]];
++            [builder setFeatureFlag:@"tile-view.enabled" withBoolean:[[meetFeatureFlags objectForKey:@"tile-view.enabled"] boolValue]];
++            [builder setFeatureFlag:@"toolbox.enabled" withBoolean:[[meetFeatureFlags objectForKey:@"toolbox.enabled"] boolValue]];
++            [builder setFeatureFlag:@"video-mute.enabled" withBoolean:[[meetFeatureFlags objectForKey:@"video-mute.enabled"] boolValue]];
++            [builder setFeatureFlag:@"video-share.enabled" withBoolean:[[meetFeatureFlags objectForKey:@"video-share.enabled"] boolValue]];
+ 
+             builder.userInfo = _userInfo;
+         }];
 diff --git a/node_modules/react-native-jitsi-meet-with-options/react-native-jitsi-meet-with-options.podspec b/node_modules/react-native-jitsi-meet-with-options/react-native-jitsi-meet-with-options.podspec
 index 096c675..7683d0e 100644
 --- a/node_modules/react-native-jitsi-meet-with-options/react-native-jitsi-meet-with-options.podspec

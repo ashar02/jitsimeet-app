@@ -51,7 +51,7 @@ function App() {
     if (userName !== '' && callLink !== '') {
       setCallStarted(true);
       setTimeout(() => {
-        const url = `https://video.circleit.com/${callLink}`;
+        const url = `https://video.circleit.com/${callLink}#userInfo.displayName=%22${userName}%22`;
         const userInfo = {
           displayName: 'userName',
           email: 'user@example.com',
@@ -81,6 +81,27 @@ function App() {
           'toolbox.alwaysVisible': false,
           'welcomepage.enabled': false,
           'filmstrip.enabled': true,
+          'audio-focus.disabled': false,
+          'audio-mute.enabled': true,
+          'audio-only.enabled': true,
+          'conference-timer.enabled': true,
+          'fullscreen.enabled': false,
+          'help.enabled': false,
+          'ios.screensharing.enabled': false,
+          'android.screensharing.enabled': false,
+          'kick-out.enabled': false,
+          'lobby-mode.enabled': false,
+          'notifications.enabled': false,
+          'overflow-menu.enabled': false,
+          'reactions.enabled': false,
+          //'replace.participant'
+          //'resolution'
+          'security-options.enabled': false,
+          'server-url-change.enabled': false,
+          'tile-view.enabled': true,
+          'toolbox.enabled': true,
+          'video-mute.enabled': true,
+          'video-share.enabled': false,
         };
         options.audioOnly = !isVideoEnabled;
         JitsiMeet.call(url, userInfo, options, meetFeatureFlags);
