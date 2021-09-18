@@ -33,7 +33,8 @@ allprojects {
         google()
         jcenter()
         maven {
-            url "https://github.com/jitsi/jitsi-maven-repository/raw/master/releases"
+            //url "https://github.com/jitsi/jitsi-maven-repository/raw/master/releases"
+            url("$rootDir/../../jitsimeet-android/android/sdk/output")
         }
         maven { url 'https://www.jitpack.io' }
     }

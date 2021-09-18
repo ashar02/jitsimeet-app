@@ -32,7 +32,7 @@ function App() {
   const onConferenceTerminated = (nativeEvent) => {
     /* Conference terminated event */
     console.log('onConferenceTerminated: ', {nativeEvent});
-    setCallLink('');
+    //setCallLink('');
     setCallStarted(false);
     setIsVideoEnabled(false);
   };
