@@ -92,7 +92,7 @@ function App() {
           'kick-out.enabled': false,
           'lobby-mode.enabled': false,
           'notifications.enabled': false,
-          'overflow-menu.enabled': false,
+          'overflow-menu.enabled': true,
           'reactions.enabled': false,
           //'replace.participant'
           //'resolution'
