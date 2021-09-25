@@ -80,7 +80,7 @@ function App() {
           'recording.enabled': false,
           'toolbox.alwaysVisible': false,
           'welcomepage.enabled': false,
-          'filmstrip.enabled': true,
+          'filmstrip.enabled': false,
           'audio-focus.disabled': false,
           'audio-mute.enabled': true,
           'audio-only.enabled': true,
