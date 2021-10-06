@@ -102,6 +102,7 @@ function App() {
           'toolbox.enabled': true,
           'video-mute.enabled': true,
           'video-share.enabled': false,
+          'initial-route-earpiece.enabled': true,
         };
         options.audioOnly = !isVideoEnabled;
         JitsiMeet.call(url, userInfo, options, meetFeatureFlags);

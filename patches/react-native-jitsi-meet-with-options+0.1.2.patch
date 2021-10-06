@@ -1,5 +1,5 @@
 diff --git a/node_modules/react-native-jitsi-meet-with-options/android/build.gradle b/node_modules/react-native-jitsi-meet-with-options/android/build.gradle
-index 27d041a..e7b5ead 100644
+index 27d041a..fe74de2 100644
 --- a/node_modules/react-native-jitsi-meet-with-options/android/build.gradle
 +++ b/node_modules/react-native-jitsi-meet-with-options/android/build.gradle
 @@ -45,7 +45,7 @@ repositories {
@@ -12,10 +12,10 @@ index 27d041a..e7b5ead 100644
      }
  }
 diff --git a/node_modules/react-native-jitsi-meet-with-options/android/src/main/java/com/reactnativejitsimeet/RNJitsiMeetModule.java b/node_modules/react-native-jitsi-meet-with-options/android/src/main/java/com/reactnativejitsimeet/RNJitsiMeetModule.java
-index eb38247..aeb1a61 100644
+index eb38247..464f7ec 100644
 --- a/node_modules/react-native-jitsi-meet-with-options/android/src/main/java/com/reactnativejitsimeet/RNJitsiMeetModule.java
 +++ b/node_modules/react-native-jitsi-meet-with-options/android/src/main/java/com/reactnativejitsimeet/RNJitsiMeetModule.java
-@@ -78,6 +78,26 @@ public class RNJitsiMeetModule extends ReactContextBaseJavaModule {
+@@ -78,6 +78,27 @@ public class RNJitsiMeetModule extends ReactContextBaseJavaModule {
                          // .setFeatureFlag("tile-view.enabled", meetFeatureFlags.getBoolean("tile-view.enabled"))
                          .setFeatureFlag("toolbox.alwaysVisible", meetFeatureFlags.getBoolean("toolbox.alwaysVisible"))
                          .setFeatureFlag("welcomepage.enabled", meetFeatureFlags.getBoolean("welcomepage.enabled"))
@@ -39,6 +39,7 @@ index eb38247..aeb1a61 100644
 +                        .setFeatureFlag("toolbox.enabled", meetFeatureFlags.getBoolean("toolbox.enabled"))
 +                        .setFeatureFlag("video-mute.enabled", meetFeatureFlags.getBoolean("video-mute.enabled"))
 +                        .setFeatureFlag("video-share.enabled", meetFeatureFlags.getBoolean("video-share.enabled"))
++                        .setFeatureFlag("initial-route-earpiece.enabled", meetFeatureFlags.getBoolean("initial-route-earpiece.enabled"))
                          .build();
                      mJitsiMeetViewReference.getJitsiMeetView().join(options);
                  }
@@ -65,7 +66,7 @@ index 06906ee..682e9ec 100644
  @end
 \ No newline at end of file
 diff --git a/node_modules/react-native-jitsi-meet-with-options/ios/RNJitsiMeetViewManager.m b/node_modules/react-native-jitsi-meet-with-options/ios/RNJitsiMeetViewManager.m
-index 9f91f0d..641fbbc 100644
+index 9f91f0d..b5c9547 100644
 --- a/node_modules/react-native-jitsi-meet-with-options/ios/RNJitsiMeetViewManager.m
 +++ b/node_modules/react-native-jitsi-meet-with-options/ios/RNJitsiMeetViewManager.m
 @@ -1,6 +1,6 @@
@@ -76,7 +77,7 @@ index 9f91f0d..641fbbc 100644
  
  @implementation RNJitsiMeetViewManager{
      RNJitsiMeetView *jitsiMeetView;
-@@ -73,6 +73,26 @@ RCT_EXPORT_METHOD(
+@@ -73,6 +73,27 @@ RCT_EXPORT_METHOD(
              [builder setFeatureFlag:@"tile-view.enabled" withBoolean:[[meetFeatureFlags objectForKey:@"tile-view.enabled"] boolValue]];
              [builder setFeatureFlag:@"tile-view.enabled" withBoolean:[[meetFeatureFlags objectForKey:@"tile-view.enabled"] boolValue]];
              [builder setFeatureFlag:@"welcomepage.enabled" withBoolean:[[meetFeatureFlags objectForKey:@"welcomepage.enabled"] boolValue]];
@@ -100,6 +101,7 @@ index 9f91f0d..641fbbc 100644
 +            [builder setFeatureFlag:@"toolbox.enabled" withBoolean:[[meetFeatureFlags objectForKey:@"toolbox.enabled"] boolValue]];
 +            [builder setFeatureFlag:@"video-mute.enabled" withBoolean:[[meetFeatureFlags objectForKey:@"video-mute.enabled"] boolValue]];
 +            [builder setFeatureFlag:@"video-share.enabled" withBoolean:[[meetFeatureFlags objectForKey:@"video-share.enabled"] boolValue]];
++            [builder setFeatureFlag:@"initial-route-earpiece.enabled" withBoolean:[[meetFeatureFlags objectForKey:@"initial-route-earpiece.enabled"] boolValue]];
  
              builder.userInfo = _userInfo;
          }];
