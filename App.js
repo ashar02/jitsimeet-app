@@ -108,11 +108,13 @@ function App() {
         JitsiMeet.call(url, userInfo, options, meetFeatureFlags);
       }, 1000);
       let count = 0;
+      let highlight = false;
       function callRepeatFn() {
-        console.log('20 seconds');
-        JitsiMeet.highlightChatButton(true);
+        console.log('highlightChatButton called');
+        highlight = !highlight;
+        JitsiMeet.highlightChatButton(highlight);
         count++;
-        if (count < 3) {
+        if (count < 5) {
           setTimeout(callRepeatFn, 20000);
         }
       }
