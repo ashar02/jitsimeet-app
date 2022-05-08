@@ -51,7 +51,7 @@ function App() {
     if (userName !== '' && callLink !== '') {
       setCallStarted(true);
       setTimeout(() => {
-        const url = `https://video.circleit.com/${callLink}#userInfo.displayName=%22${userName}%22`;
+        const url = `https://meet.jit.si/${callLink}#userInfo.displayName=%22${userName}%22`;
         const userInfo = {
           displayName: 'userName',
           email: 'user@example.com',
@@ -68,7 +68,7 @@ function App() {
           'add-people.enabled': false,
           'calendar.enabled': false,
           'call-integration.enabled': false,
-          'chat.enabled': false,
+          'chat.enabled': true,
           'close-captions.enabled': false,
           'invite.enabled': false,
           'ios.recording.enabled': false,
@@ -107,6 +107,16 @@ function App() {
         options.routeEarpieceEnabled = true;
         JitsiMeet.call(url, userInfo, options, meetFeatureFlags);
       }, 1000);
+      let count = 0;
+      function callRepeatFn() {
+        console.log('20 seconds');
+        JitsiMeet.highlightChatButton(true);
+        count++;
+        if (count < 3) {
+          setTimeout(callRepeatFn, 20000);
+        }
+      }
+      setTimeout(callRepeatFn, 20000);
     } else {
       Alert.alert('Make sure to enter your name and call-link!');
     }
