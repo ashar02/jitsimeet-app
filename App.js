@@ -106,19 +106,19 @@ function App() {
         options.audioOnly = !isVideoEnabled;
         options.routeEarpieceEnabled = true;
         JitsiMeet.call(url, userInfo, options, meetFeatureFlags);
-      }, 1000);
-      let count = 0;
-      let highlight = false;
-      function callRepeatFn() {
-        console.log('highlightChatButton called');
-        highlight = !highlight;
-        JitsiMeet.highlightChatButton(highlight);
-        count++;
-        if (count < 5) {
-          setTimeout(callRepeatFn, 20000);
+        let count = 0;
+        let highlight = false;
+        function callRepeatFn() {
+          console.log('highlightChatButton called');
+          highlight = !highlight;
+          JitsiMeet.highlightChatButton(highlight);
+          count++;
+          if (count < 5) {
+            setTimeout(callRepeatFn, 20000);
+          }
         }
-      }
-      setTimeout(callRepeatFn, 20000);
+        setTimeout(callRepeatFn, 20000);
+      }, 1000);
     } else {
       Alert.alert('Make sure to enter your name and call-link!');
     }
