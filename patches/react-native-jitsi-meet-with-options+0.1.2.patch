@@ -12,10 +12,14 @@ index 27d041a..e7b5ead 100644
      }
  }
 diff --git a/node_modules/react-native-jitsi-meet-with-options/android/src/main/java/com/reactnativejitsimeet/RNJitsiMeetModule.java b/node_modules/react-native-jitsi-meet-with-options/android/src/main/java/com/reactnativejitsimeet/RNJitsiMeetModule.java
-index eb38247..6f1bec5 100644
+index eb38247..1343b3a 100644
 --- a/node_modules/react-native-jitsi-meet-with-options/android/src/main/java/com/reactnativejitsimeet/RNJitsiMeetModule.java
 +++ b/node_modules/react-native-jitsi-meet-with-options/android/src/main/java/com/reactnativejitsimeet/RNJitsiMeetModule.java
-@@ -4,12 +4,16 @@ import android.util.Log;
+@@ -1,24 +1,35 @@
+ package com.reactnativejitsimeet;
+ 
+ import android.util.Log;
++import android.content.Intent;
  import java.net.URL;
  import java.net.MalformedURLException;
  
@@ -29,10 +33,25 @@ index eb38247..6f1bec5 100644
 +import com.facebook.react.bridge.WritableMap;
 +import com.facebook.react.modules.core.DeviceEventManagerModule;
 +
++import androidx.localbroadcastmanager.content.LocalBroadcastManager;
++
++import org.jitsi.meet.sdk.BroadcastAction;
++
  
  @ReactModule(name = RNJitsiMeetModule.MODULE_NAME)
  public class RNJitsiMeetModule extends ReactContextBaseJavaModule {
-@@ -78,6 +82,26 @@ public class RNJitsiMeetModule extends ReactContextBaseJavaModule {
+     public static final String MODULE_NAME = "RNJitsiMeetModule";
+     private IRNJitsiMeetViewReference mJitsiMeetViewReference;
++    private ReactApplicationContext mReactContext;
+ 
+     public RNJitsiMeetModule(ReactApplicationContext reactContext, IRNJitsiMeetViewReference jitsiMeetViewReference) {
+         super(reactContext);
+         mJitsiMeetViewReference = jitsiMeetViewReference;
++        mReactContext = reactContext;
+     }
+ 
+     @Override
+@@ -78,6 +89,26 @@ public class RNJitsiMeetModule extends ReactContextBaseJavaModule {
                          // .setFeatureFlag("tile-view.enabled", meetFeatureFlags.getBoolean("tile-view.enabled"))
                          .setFeatureFlag("toolbox.alwaysVisible", meetFeatureFlags.getBoolean("toolbox.alwaysVisible"))
                          .setFeatureFlag("welcomepage.enabled", meetFeatureFlags.getBoolean("welcomepage.enabled"))
@@ -59,7 +78,7 @@ index eb38247..6f1bec5 100644
                          .build();
                      mJitsiMeetViewReference.getJitsiMeetView().join(options);
                  }
-@@ -129,4 +153,23 @@ public class RNJitsiMeetModule extends ReactContextBaseJavaModule {
+@@ -129,4 +160,18 @@ public class RNJitsiMeetModule extends ReactContextBaseJavaModule {
              }
          });
      }
@@ -70,14 +89,9 @@ index eb38247..6f1bec5 100644
 +            @Override
 +            public void run() {
 +                if (mJitsiMeetViewReference.getJitsiMeetView() != null) {
-+                    //mJitsiMeetViewReference.getJitsiMeetView().highlightChatButton(shouldHighlight);
-+                    //WritableMap event = Arguments.createMap();
-+                    //event.putString("eventProperty", "someValue");
-+                    //try {
-+                    //    mReactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("EventReminder", event);
-+                    //} catch (RuntimeException e) {
-+                    //    Log.d("JitsiMeet", "exception in highlight chat button");
-+                    //}
++                    Intent highlightChatButtonIntent = new Intent("org.jitsi.meet.HIGHLIGHT_CHAT_BUTTON");
++                    highlightChatButtonIntent.putExtra("highlight", highlight);
++                    LocalBroadcastManager.getInstance(mReactContext).sendBroadcast(highlightChatButtonIntent);
 +                }
 +            }
 +        });
