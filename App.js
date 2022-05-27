@@ -47,6 +47,14 @@ function App() {
     console.log('onConferenceWillJoin:', {nativeEvent});
   };
 
+  const onChatButtonPressed = (e) => {
+    console.log('onChatButtonPressed in app.js.');
+  };
+
+  const onInvitePeopleButtonPressed = (e) => {
+    console.log('onInvitePeopleButtonPressed in app.js.');
+  };
+
   const startCall = () => {
     if (userName !== '' && callLink !== '') {
       setCallStarted(true);
@@ -106,18 +114,18 @@ function App() {
         options.audioOnly = !isVideoEnabled;
         options.routeEarpieceEnabled = true;
         JitsiMeet.call(url, userInfo, options, meetFeatureFlags);
-        let count = 0;
-        let highlight = false;
-        function callRepeatFn() {
-          console.log('highlightChatButton called');
-          highlight = !highlight;
-          JitsiMeet.highlightChatButton(highlight);
-          count++;
-          if (count < 5) {
-            setTimeout(callRepeatFn, 20000);
-          }
-        }
-        setTimeout(callRepeatFn, 20000);
+        //let count = 0;
+        //let highlight = false;
+        //function callRepeatFn() {
+        //  console.log('highlightChatButton called');
+        //  highlight = !highlight;
+        //  JitsiMeet.highlightChatButton(highlight);
+        //  count++;
+        //  if (count < 5) {
+        //    setTimeout(callRepeatFn, 20000);
+        //  }
+        //}
+        //setTimeout(callRepeatFn, 20000);
       }, 1000);
     } else {
       Alert.alert('Make sure to enter your name and call-link!');
@@ -167,6 +175,8 @@ function App() {
         onConferenceTerminated={(e) => onConferenceTerminated(e)}
         onConferenceJoined={(e) => onConferenceJoined(e)}
         onConferenceWillJoin={(e) => onConferenceWillJoin(e)}
+        onChatButtonPressed={(e) => onChatButtonPressed(e)}
+        onInvitePeopleButtonPressed={(e) => onInvitePeopleButtonPressed(e)}
         style={styles.callContainer}
       />
     );

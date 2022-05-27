@@ -125,7 +125,7 @@ index 071b3a6..0d943a8 100644
  }
 \ No newline at end of file
 diff --git a/node_modules/react-native-jitsi-meet-with-options/ios/RNJitsiMeetView.h b/node_modules/react-native-jitsi-meet-with-options/ios/RNJitsiMeetView.h
-index c6022e9..b9d2a7a 100644
+index c6022e9..0853dd9 100644
 --- a/node_modules/react-native-jitsi-meet-with-options/ios/RNJitsiMeetView.h
 +++ b/node_modules/react-native-jitsi-meet-with-options/ios/RNJitsiMeetView.h
 @@ -1,4 +1,4 @@
@@ -134,11 +134,12 @@ index c6022e9..b9d2a7a 100644
  
  #import <React/RCTComponent.h>
  
-@@ -7,4 +7,5 @@
+@@ -7,4 +7,6 @@
  @property (nonatomic, copy) RCTBubblingEventBlock onConferenceTerminated;
  @property (nonatomic, copy) RCTBubblingEventBlock onConferenceWillJoin;
  @property (nonatomic, copy) RCTBubblingEventBlock onEnteredPip;
 +@property (nonatomic, copy) RCTBubblingEventBlock onChatButtonPressed;
++@property (nonatomic, copy) RCTBubblingEventBlock onInvitePeopleButtonPressed;
  @end
 \ No newline at end of file
 diff --git a/node_modules/react-native-jitsi-meet-with-options/ios/RNJitsiMeetViewManager.h b/node_modules/react-native-jitsi-meet-with-options/ios/RNJitsiMeetViewManager.h
@@ -154,7 +155,7 @@ index 06906ee..682e9ec 100644
  @end
 \ No newline at end of file
 diff --git a/node_modules/react-native-jitsi-meet-with-options/ios/RNJitsiMeetViewManager.m b/node_modules/react-native-jitsi-meet-with-options/ios/RNJitsiMeetViewManager.m
-index 9f91f0d..94ac286 100644
+index 9f91f0d..7073ff1 100644
 --- a/node_modules/react-native-jitsi-meet-with-options/ios/RNJitsiMeetViewManager.m
 +++ b/node_modules/react-native-jitsi-meet-with-options/ios/RNJitsiMeetViewManager.m
 @@ -1,6 +1,6 @@
@@ -165,15 +166,16 @@ index 9f91f0d..94ac286 100644
  
  @implementation RNJitsiMeetViewManager{
      RNJitsiMeetView *jitsiMeetView;
-@@ -11,6 +11,7 @@ RCT_EXPORT_VIEW_PROPERTY(onConferenceJoined, RCTBubblingEventBlock)
+@@ -11,6 +11,8 @@ RCT_EXPORT_VIEW_PROPERTY(onConferenceJoined, RCTBubblingEventBlock)
  RCT_EXPORT_VIEW_PROPERTY(onConferenceTerminated, RCTBubblingEventBlock)
  RCT_EXPORT_VIEW_PROPERTY(onConferenceWillJoin, RCTBubblingEventBlock)
  RCT_EXPORT_VIEW_PROPERTY(onEnteredPip, RCTBubblingEventBlock)
 +RCT_EXPORT_VIEW_PROPERTY(onChatButtonPressed, RCTBubblingEventBlock)
++RCT_EXPORT_VIEW_PROPERTY(onInvitePeopleButtonPressed, RCTBubblingEventBlock)
  
  - (UIView *)view
  {
-@@ -73,6 +74,26 @@ RCT_EXPORT_METHOD(
+@@ -73,6 +75,26 @@ RCT_EXPORT_METHOD(
              [builder setFeatureFlag:@"tile-view.enabled" withBoolean:[[meetFeatureFlags objectForKey:@"tile-view.enabled"] boolValue]];
              [builder setFeatureFlag:@"tile-view.enabled" withBoolean:[[meetFeatureFlags objectForKey:@"tile-view.enabled"] boolValue]];
              [builder setFeatureFlag:@"welcomepage.enabled" withBoolean:[[meetFeatureFlags objectForKey:@"welcomepage.enabled"] boolValue]];
@@ -200,12 +202,11 @@ index 9f91f0d..94ac286 100644
  
              builder.userInfo = _userInfo;
          }];
-@@ -151,4 +172,20 @@ RCT_EXPORT_METHOD(endCall)
+@@ -151,4 +173,26 @@ RCT_EXPORT_METHOD(endCall)
      jitsiMeetView.onEnteredPip(data);
  }
  
 +- (void)chatButtonPressed:(NSDictionary *)data {
-+    RCTLogInfo(@"Enter Chat Button Pressed");
 +    if (!jitsiMeetView.onChatButtonPressed) {
 +        return;
 +    }
@@ -213,8 +214,15 @@ index 9f91f0d..94ac286 100644
 +    jitsiMeetView.onChatButtonPressed(data);
 +}
 +
-+RCT_EXPORT_METHOD(highlightChatButton:(BOOL)highlight)
-+{
++- (void)invitePeopleButtonPressed:(NSDictionary *)data {
++    if (!jitsiMeetView.onInvitePeopleButtonPressed) {
++        return;
++    }
++
++    jitsiMeetView.onInvitePeopleButtonPressed(data);
++}
++
++RCT_EXPORT_METHOD(highlightChatButton:(BOOL)highlight) {
 +    dispatch_sync(dispatch_get_main_queue(), ^{
 +        [jitsiMeetView highlightChatButton:highlight];
 +    });
