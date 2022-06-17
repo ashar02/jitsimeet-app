@@ -98,10 +98,10 @@ index eb38247..1343b3a 100644
 +    }
  }
 diff --git a/node_modules/react-native-jitsi-meet-with-options/android/src/main/java/com/reactnativejitsimeet/RNJitsiMeetViewManager.java b/node_modules/react-native-jitsi-meet-with-options/android/src/main/java/com/reactnativejitsimeet/RNJitsiMeetViewManager.java
-index 071b3a6..445dae5 100644
+index 071b3a6..1a84999 100644
 --- a/node_modules/react-native-jitsi-meet-with-options/android/src/main/java/com/reactnativejitsimeet/RNJitsiMeetViewManager.java
 +++ b/node_modules/react-native-jitsi-meet-with-options/android/src/main/java/com/reactnativejitsimeet/RNJitsiMeetViewManager.java
-@@ -70,11 +70,29 @@ public class RNJitsiMeetViewManager extends SimpleViewManager<RNJitsiMeetView> i
+@@ -70,11 +70,49 @@ public class RNJitsiMeetViewManager extends SimpleViewManager<RNJitsiMeetView> i
                  event);
      }
  
@@ -121,6 +121,24 @@ index 071b3a6..445dae5 100644
 +                event);
 +    }
 +
++    public void onProfileInfoButtonPressed(Map<String, Object> data) {
++        WritableMap event = Arguments.createMap();
++        event.putString("email", (String) data.get("email"));
++        mReactContext.getJSModule(RCTEventEmitter.class).receiveEvent(
++                mJitsiMeetViewReference.getJitsiMeetView().getId(),
++                "profileInfoButtonPressed",
++                event);
++    }
++
++    public void onPrivateChatButtonPressed(Map<String, Object> data) {
++        WritableMap event = Arguments.createMap();
++        event.putString("email", (String) data.get("email"));
++        mReactContext.getJSModule(RCTEventEmitter.class).receiveEvent(
++                mJitsiMeetViewReference.getJitsiMeetView().getId(),
++                "privateChatButtonPressed",
++                event);
++    }
++
      public Map getExportedCustomBubblingEventTypeConstants() {
          return MapBuilder.builder()
                  .put("conferenceJoined", MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onConferenceJoined")))
@@ -128,6 +146,8 @@ index 071b3a6..445dae5 100644
                  .put("conferenceWillJoin", MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onConferenceWillJoin")))
 +                .put("chatButtonPressed", MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onChatButtonPressed")))
 +                .put("invitePeopleButtonPressed", MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onInvitePeopleButtonPressed")))
++                .put("profileInfoButtonPressed", MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onProfileInfoButtonPressed")))
++                .put("privateChatButtonPressed", MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onPrivateChatButtonPressed")))
                  .build();
      }
  }

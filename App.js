@@ -55,6 +55,14 @@ function App() {
     console.log('onInvitePeopleButtonPressed in app.js.');
   };
 
+  const onProfileInfoButtonPressed = (e) => {
+    console.log('onProfileInfoButtonPressed in app.js. ' + e.nativeEvent.email);
+  };
+
+  const onPrivateChatButtonPressed = (e) => {
+    console.log('onPrivateChatButtonPressed in app.js ' + e.nativeEvent.email);
+  };
+
   const startCall = () => {
     if (userName !== '' && callLink !== '') {
       setCallStarted(true);
@@ -177,6 +185,8 @@ function App() {
         onConferenceWillJoin={(e) => onConferenceWillJoin(e)}
         onChatButtonPressed={(e) => onChatButtonPressed(e)}
         onInvitePeopleButtonPressed={(e) => onInvitePeopleButtonPressed(e)}
+        onProfileInfoButtonPressed={(e) => onProfileInfoButtonPressed(e)}
+        onPrivateChatButtonPressed={(e) => onPrivateChatButtonPressed(e)}
         style={styles.callContainer}
       />
     );
